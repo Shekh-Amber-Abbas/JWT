@@ -1,0 +1,53 @@
+const express = require('express');
+const userModel = require('../model/userModel');
+const userRouter = express.Router();
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+const ver = require('../middleware/ver');
+
+userRouter.get('/',async(req,res)=>{
+    const user = await userModel.find();
+    return res.json({"msg":"success",user})
+ })
+
+ userRouter.post('/',async(req,res)=>{
+    const{name,email,password}=req.body
+    const hash = await bcrypt.hash(password,10);
+    await userModel.create({name,email,password:hash}) 
+    return res.json({"msg":"success"})
+ })
+
+ userRouter.post('/log',async(req,res)=>{
+    const {email,password}=req.body;
+    const user = await userModel.findOne({email})
+    if(!user){
+        return res.json({"msg":"user not found"})
+    }
+    const isMatch = bcrypt.compare(password,user.password);
+    if(!isMatch){
+        return res.json({"msg":"password mismatch"})
+    }
+      const token =jwt.sign({id:user._id},
+        process.env.JWTKEY,
+        {expiresIn:"1d"}
+    )
+    return res.json({"msg":"success","token":token})
+ })
+
+
+ userRouter.get('/val',ver,async(req,res)=>{
+    try{
+        return res.json({"msg":"success",user:req.user})
+    }
+    catch(error){
+        if(error=="jwt.TokenExpiredError"){
+
+            return res.json({"msg":"Token expired"})
+        }
+        else{
+            return res.json({"msg":"Invalid token"})
+        }
+    }
+ })
+
+ module.exports = userRouter;
