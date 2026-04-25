@@ -11,7 +11,7 @@ function Log() {
         e.preventDefault();
         try{
          const data = {email,password};
-        const res = await axios.post('http://localhost:5000/api/user/log',data)
+        const res = await axios.post('https://jwt-backend-wq1j.onrender.com/api/user/log',data)
         console.table(res);
            if(res.data.msg=="success"){
             window.alert("Login Success")
