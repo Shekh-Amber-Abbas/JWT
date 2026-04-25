@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 function ver(req,res,next){
-    const token = req.cookie.token;
+    const token = req.cookies.token;
     if(!token){
         return res.json({"msg":"token not found"})
     }

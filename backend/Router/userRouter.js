@@ -23,7 +23,7 @@ userRouter.get('/',async(req,res)=>{
     if(!user){
         return res.json({"msg":"user not found"})
     }
-    const isMatch = bcrypt.compare(password,user.password);
+    const isMatch = await bcrypt.compare(password,user.password);
     if(!isMatch){
         return res.json({"msg":"password mismatch"})
     }
