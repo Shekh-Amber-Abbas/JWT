@@ -20,7 +20,7 @@ app.use(express.json());
 // app.use('/api/user',userRouter)
 app.use('/api/user', stRouter)
 
-// app.get('/',(req,res)=>{
-//     res.send({"msg":"success"})
-// })
+app.get('/',(req,res)=>{
+    res.send({"msg":"success"})
+})
 app.listen(process.env.PORT,()=>console.log(`server is running on ${process.env.PORT}`));
