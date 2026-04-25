@@ -11,7 +11,7 @@ function Reg() {
         e.preventDefault();
         try{
             const data = {name,email,password}
-           const res = await axios.post('http://localhost:5000/api/user',data)
+           const res = await axios.post('https://jwt-backend-wq1j.onrender.com/api/user',data)
            console.log(res);
            if(res.data.msg=="success"){
            window.alert("Registration successful")
