@@ -7,7 +7,7 @@ function Udash() {
     const navigate = useNavigate();
     const validate = async()=>{
         console.log("Validtion");
-     const res = await axios.get('http://localhost:5000/api/user/val',{  
+     const res = await axios.get('https://jwt-backend-wq1j.onrender.com/api/user/val',{  
         // headers:{
         //     "Authorization":localStorage.getItem('token')
         // } 
