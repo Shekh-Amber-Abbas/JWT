@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGOURL)
 .then(()=>console.log('DB Connected'))
 .catch((error)=>console.log((error)))
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin:'https://jwt-6hgx.onrender.com/',
     credentials:true
 }))
 app.use(express.json());
